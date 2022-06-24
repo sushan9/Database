@@ -1,0 +1,143 @@
+//Database -- SQL query preperation
+
+***** Why Database not EXCEl--i) One is security reason, Limited data is stored in excel .
+
+Database-- It stores data in an organozed form. Database is just a file.Database consist of one or more table
+
+Database Management system:-  It is a program that manages database file.
+                            For example:- MySQL, Oracle, MSSQL.. so on
+
+SQL(structured Query Language) - It is an official language of DataBase.
+
+RDBMS- Data are organized in the form of rows and columns.
+
+
+
+
+************* SQL Ouery***************
+
+To create Database:-
+    CREATE Database <Database-Name>;
+for example create database for our college--------- CREATE Database college;
+
+**************
+To Delete Database:-
+     DROP Database <Database-name>;
+for example Delete Database of college ------------ DROP Database college;
+**************
+To Create Table
+     CREATE TABLE <table_name> (
+   //column_name data_type;
+//column_name data_type;
+//column_name data_type;
+);
+
+For example:   
+CREATE TABLE student(
+id int,
+name VARCHAR(100),
+district VARCHAR(50),
+gender enum ('M','F','O'),
+dob date,
+total_fee float,
+paid_fee float
+);
+*****************
+To Delete Table:
+
+DROP TABLE <table_name>
+Example: DROP TABLE student;
+
+*************************
+To insert Data in table
+
+INSERT INTO <table_name> (colname1,colname2.....) VALUES(colname1value,colnamevalue2.....)
+For example:
+INSERT INTO student (id,name,district,gender,dob,total_fee,paid_fee) VALUES(1,'Ram sharma','kathmandu','M','2000-12-02',60000,40000);
+
+************************
+To view different Data in table using distinct statement
+
+SELECT DISTINCT <data_name> FROM <table_name>;
+For example:  SELECT DISTINCT district FROM student;
+
+***********************
+To Delete data from table
+
+DELETE FROM <table_name> Where condition
+for example
+DELETE FROM student WHERE id=1;
+
+******************
+To update data in table
+
+UPDATE <table_name> SET columnname=value WHERE condition;
+UPDATE student SET district=kathmandu,id=3 WHERE name='Ramu sharma';
+
+
+************************
+Where clause:
+
+SELECT * FROM <table_name> WHERE <condition>
+SELECT * FROM student WHERE gender='M'; 
+
+*******************
+AND operator : All condition must be true.
+For example:
+SELECT * FROM student WHERE gender='M' and district='kathmandu';
+*********************
+OR operator: if any one condition is true
+
+SELECT * FROM student WHERE gender='M' or paid_fee>10000;
+**********************
+
+IN Operator
+
+SELECT * FROM student WHERE district IN('kathmandu','lalitpur');
+***********************
+NOT IN operator
+
+SELECT * FROM student WHERE district NOT IN('kathmandu','lalitpur');
+
+*****************
+NULL/EMpty-- NUll means nothing ////empty is value with 0 length
+SELECT * FROM student WHERE name IS NULL
+*****************
+
+Data is ascending and descending order
+
+SELECT * FROM student ORDER BY name ASC;------ this is for ascending order
+SELECR * FROM student ORDER BY name DESC;------- this is for descending order
+
+***********************
+MIN, MAX, AVG
+
+SELECT MIN(paid_fee) From student;
+SELECT MAX(paid_fee) From student;
+SELECT AVG(paid_fee) From student;
+
+**************************
+LIMIT 
+
+SELECT * FROM student limit 2;
+SELECT * FROM student limit 1,3;
+
+*************************
+Search in SQL
+LIKE Operator
+it helps to search the data
+
+wildcard
+a. % --it represent any text
+b. _ -- it represent single character
+for example: name start with R
+SELECT * FROM student WHERE name LIKE 'R%';
+example: name end with m 
+SELECT * FROM student WHERE name LIKE '%m'; 
+
+use of _
+
+SELECT * FROM student WHERE name LIKE 'Ra_';
+
+mixig both:
+SELECT * FROM student WHERE name LIKE 'R_%'
