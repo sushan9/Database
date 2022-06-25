@@ -141,3 +141,63 @@ SELECT * FROM student WHERE name LIKE 'Ra_';
 
 mixig both:
 SELECT * FROM student WHERE name LIKE 'R_%'
+
+
+********Primary Key and foreign Key in SQL*******
+
+Primary key:-it is a constraint that uniquely identify the each record.
+            1) it cannot be null
+            2) it must be unique.
+
+creating new table in employee_record  databse
+
+CREATE TABLE information(
+id int PRIMARY key AUTO_INCREMENT,
+    name VARCHAR(100) NOT Null,
+    Gender enum('M','F','O'),
+    is_added Datetime DEFAULT now()
+
+);
+
+Inserting data*********
+
+INSERT INTO information(name,Gender) VALUES('ram','M'),('shyam Bahadur','M'),('Gita kumari','F');
+
+making another table as a foreign key
+
+CREATE TABLE phone(
+    id int PRIMARY key AUTO_INCREMENT,
+    person_id int Not null,
+    phone_no VARCHAR(15) Not null,
+    is_added DATETIME DEFAULT now(),
+    FOREIGN KEY(person_id) REFERENCES information(id)
+    );
+
+to know phone no using sql query
+*********************
+SELECT phone_no FROM phone WHERE person_id=2;
+if we dont know the id no and we only know the name then we can use the following query
+
+select phone_no from phone where person_id=( select id from information where information.name='gita kumari');
+***********************
+Join in SQL-----------
+**********
+It is the process of getting result from two or more table based on related column.
+
+1. inner join----- Gives only martching result in both table
+2. left join------ gives matching +left table
+3. right join------ gives matching result+ right table
+4. full join ------- gives full record of the table matching+left+right
+
+1. inner join:
+SELECT tablename.colname from table1 join table2 ON table1.matchingcol=table2.matchingcol;
+SELECT information.name,phone.phone_no from information join phone ON information.id=phone.person_id
+
+for specific person:
+
+SELECT information.name,phone.phone_no from information join phone ON information.id=phone.person_id AND information.name='gita kumari';
+
+left join -----
+SELECT information.name,phone.phone_no from information left join phone ON information.id=phone.person_id;
+right join----
+SELECT information.name,phone.phone_no from information right join phone ON information.id=phone.person_id;
