@@ -201,3 +201,56 @@ left join -----
 SELECT information.name,phone.phone_no from information left join phone ON information.id=phone.person_id;
 right join----
 SELECT information.name,phone.phone_no from information right join phone ON information.id=phone.person_id;
+
+
+********************************************************************************
+one example of database,
+
+CREATE Database facebook;
+
+CREATE TABLE USERS(
+    id int PRIMARY key AUTO_INCREMENT,
+    name VARCHAR(50),
+    password VARCHAR(256),
+    Address VARCHAR(100),
+    email VARCHAR(100),
+    Phone VARCHAR(20)
+    
+    );
+
+creating table for post
+
+CREATE TABLE post(
+id int PRIMARY key AUTO_INCREMENT,
+    Title VARCHAR(256),
+    body TEXT,
+    publish_date date,
+    user_id int,
+    FOREIGN KEY(user_id) REFERENCES users(id)
+);
+
+creating comment table
+
+CREATE TABLE comment(
+post_id int NOT null,
+userid int NOt null,
+    Comment VARCHAR(100),
+    dates datetime,
+    FOREIGN KEY (post_id) REFERENCES post(id),
+    Foreign key (userid) references users(id)
+);
+
+data insertionn
+
+INSERT INTO `users` (`id`, `name`, `password`, `Address`, `email`, `Phone`) VALUES (NULL, 'hari narayan', 'fkasjfksj', 'morang', 'ram@gmail.com', '982844894');
+
+insertion data in post
+
+INSERT INTO `post` (`id`, `Title`, `body`, `publish_date`, `user_id`) VALUES (NULL, 'BYE bye kathmandu', 'Travelling to ilam. Hurrah i am travelling to ilam.', '2022-06-26', '2');
+
+
+
+
+select users.id,users.name,post.Title,post.body FROM users JOIN post ON users.id=post.user_id;
+
+SELECT Comment.Comment FROM Comment JOIN post ON Comment.post_id=post.id where post_id=1;
