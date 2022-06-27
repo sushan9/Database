@@ -1,0 +1,73 @@
+use college;
+-- select * from student;
+
+-- drop table student;
+-- select * from student;
+
+create table employee(
+emp_id int primary key auto_increment,
+First_name VARCHAR(20),
+Last_name varchar(20),
+birth_date date,
+sex enum('M','F','O'),
+salary bigint,
+super_id int
+
+);
+
+select * from employee;
+
+alter table employee add branch_id int;
+
+create table Branch(
+Branch_id int primary key,
+Branch_name VARCHAR(50),
+mgr_id int,
+mgr_start_date date,
+Foreign key (mgr_id) references employee(emp_id) on delete set null
+);
+describe branch;
+
+create table client(
+client_id int primary key,
+client_name VARCHAR(50),
+branch_id int,
+foreign key (branch_id) references branch(branch_id) on delete set null
+);
+describe client;
+
+create table works_with(
+emp_id int,
+client_id int,
+total_sales int,
+primary key(emp_id,client_id),
+foreign key (emp_id) references employee(emp_id) on delete cascade,
+foreign key (client_id) references client(client_id) on delete cascade
+);
+describe works_with;
+
+Create table Branch_suppliers(
+Branch_id int,
+supplier_name varchar(50),
+supply_type varchar(100),
+primary key(Branch_id,supplier_name),
+Foreign key (Branch_id) references branch(Branch_id) on delete cascade
+);
+select * from college;
+
+alter table employee add foreign key (branch_id) references branch(branch_id) 
+on delete set null;
+alter table employee add  foreign key (super_id) references employee( emp_id) on delete set null;
+
+-- inserting data in the table
+
+insert into employee values(100,'Ram','Charan','2000-10-19','M',20000,null,null);
+select * from employee;
+
+Insert into branch values(1,'corporate',100,'2010-12-03');
+
+update employee set branch_id=1 where emp_id=100;
+
+insert into employee values(101,'jony','vaiya','1999-12-04','M',30000,100,1);
+
+
